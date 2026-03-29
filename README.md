@@ -1,7 +1,6 @@
 # MedGuard AI — Healthcare Compliance Platform
 
 **5 Domain-Specialized AI Agents with Compliance Guardrails**
-*Economic Times GenAI Hackathon — Round 2 Submission*
 
 ---
 
@@ -83,7 +82,7 @@ medguard/
 ### 1. Clone & Configure
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/medguard-ai.git
+git clone https://github.com/Avadhijain2004/medguard-ai.git
 cd medguard-ai
 ```
 
