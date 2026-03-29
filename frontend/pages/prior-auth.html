@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prior Authorization Agent — MedGuard AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="7" fill="#1B4F72"/>
+        <path d="M14 6v16M6 14h16" stroke="#A8C8E8" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="4" stroke="#5BA4CF" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="logo-text"><span class="logo-name">MedGuard</span><span class="logo-sub">AI Platform</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Agents</div>
+    <a href="../index.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg>Dashboard</a>
+    <a href="medical-coding.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><path d="M4 3h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Medical Coding</a>
+    <a href="prior-auth.html" class="nav-item active"><svg class="nav-icon" viewBox="0 0 20 20"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.7l-4.9 2.5.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Prior Authorization</a>
+    <a href="claims.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Claims Adjudication</a>
+    <a href="device-form.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><rect x="6" y="2" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 16h2M10 14v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Device Implant Form</a>
+    <div class="nav-section-label" style="margin-top:16px">Compliance</div>
+    <a href="audit.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><path d="M3 6h14M3 10h10M3 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Audit Trail</a>
+  </nav>
+  <div class="sidebar-footer"><div class="compliance-badge"><span class="badge-dot"></span>HIPAA Compliant</div></div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left"><h1 class="page-title">Prior Authorization Agent</h1></div>
+    <div class="topbar-right"><button class="btn btn-secondary btn-sm" onclick="loadSample()">Load Sample Request</button></div>
+  </header>
+
+  <div class="page-content">
+    <div class="agent-page">
+
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Authorization Request</div><div class="card-subtitle">Enter member and procedure details</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Member ID</label>
+              <input class="form-input" id="member-id" placeholder="MBR-XXXXXXXX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Insurance Plan</label>
+              <input class="form-input" id="insurance-plan" placeholder="e.g. BlueCross PPO Gold">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Procedure Code (CPT)</label>
+              <input class="form-input" id="procedure-code" placeholder="e.g. 27447">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Requesting Provider</label>
+              <input class="form-input" id="provider" placeholder="Dr. Name, Specialty">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Diagnosis Codes (ICD-10, comma separated)</label>
+            <input class="form-input" id="diagnosis-codes" placeholder="e.g. M17.11, E11.40">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Clinical Justification</label>
+            <textarea class="form-textarea" id="clinical-justification" placeholder="Document failed conservative treatments, clinical findings, functional impairment..." style="min-height:120px"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Requested Facility</label>
+              <input class="form-input" id="facility" placeholder="Hospital / Facility name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Requested Date</label>
+              <input class="form-input" id="req-date" type="date">
+            </div>
+          </div>
+          <button class="btn btn-primary" id="run-btn" onclick="runAgent()" style="width:100%">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M8 7l6 3-6 3V7z" fill="currentColor"/></svg>
+            Evaluate Authorization
+          </button>
+        </div>
+      </div>
+
+      <div id="results-col">
+        <div class="result-panel">
+          <div class="result-empty">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 1-4.5 4.4 1 6.1L12 16.9l-5.5 2.6 1-6.1L3 9l6-1z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <p>Submit a request to receive<br>an authorization decision</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="../js/api.js"></script>
+<script>
+async function loadSample() {
+  const data = await apiGet('/prior-auth/sample');
+  document.getElementById('member-id').value = data.member_id || '';
+  document.getElementById('insurance-plan').value = data.insurance_plan || '';
+  document.getElementById('procedure-code').value = data.procedure_code || '';
+  document.getElementById('provider').value = data.requesting_provider || '';
+  document.getElementById('diagnosis-codes').value = (data.diagnosis_codes || []).join(', ');
+  document.getElementById('clinical-justification').value = data.clinical_justification || '';
+  document.getElementById('facility').value = data.requested_facility || '';
+  document.getElementById('req-date').value = data.requested_date || '';
+}
+
+async function runAgent() {
+  const procCode = document.getElementById('procedure-code').value.trim();
+  if (!procCode) { alert('Please enter a procedure code.'); return; }
+
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true;
+  showLoading('results-col', 'Evaluating authorization request against clinical criteria...');
+
+  const diagRaw = document.getElementById('diagnosis-codes').value;
+  const diagCodes = diagRaw.split(',').map(s => s.trim()).filter(Boolean);
+
+  try {
+    const result = await apiPost('/prior-auth/evaluate', {
+      member_id: document.getElementById('member-id').value,
+      insurance_plan: document.getElementById('insurance-plan').value,
+      procedure_code: procCode,
+      requesting_provider: document.getElementById('provider').value,
+      diagnosis_codes: diagCodes,
+      clinical_justification: document.getElementById('clinical-justification').value,
+      requested_facility: document.getElementById('facility').value,
+      requested_date: document.getElementById('req-date').value
+    });
+    renderResults(result);
+  } catch(e) {
+    showError('results-col', 'Agent error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderResults(r) {
+  const col = document.getElementById('results-col');
+  const cls = decisionClass(r.decision);
+
+  const criteriaHtml = (r.criteria_evaluated || []).map(c => `
+    <div class="criterion-item">
+      <svg class="criterion-icon ${c.met ? 'met' : 'not-met'}" viewBox="0 0 16 16" fill="none">
+        ${c.met
+          ? '<path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+          : '<path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+        }
+      </svg>
+      <div class="criterion-text">
+        <div class="criterion-name">${escapeHtml(c.criterion)}</div>
+        <div class="criterion-evidence">${escapeHtml(c.evidence)}</div>
+      </div>
+    </div>`
+  ).join('');
+
+  const missingHtml = (r.missing_documentation || []).map(m =>
+    `<div class="flag-item warning"><div class="flag-dot"></div>${escapeHtml(m)}</div>`
+  ).join('');
+
+  const guidelinesHtml = (r.clinical_guidelines_cited || []).map(g =>
+    `<div class="flag-item info"><div class="flag-dot"></div>${escapeHtml(g)}</div>`
+  ).join('');
+
+  const authNum = r.authorization_number
+    ? `<div class="kv-row"><span class="kv-key">Auth Number</span><span class="kv-value" style="color:var(--green)">${escapeHtml(r.authorization_number)}</span></div>
+       <div class="kv-row"><span class="kv-key">Valid For</span><span class="kv-value">${r.valid_days || 90} days</span></div>`
+    : '';
+
+  const denialHtml = r.denial_reason_code
+    ? `<div class="kv-row"><span class="kv-key">Denial Code</span><span class="kv-value" style="color:var(--red)">${escapeHtml(r.denial_reason_code)}</span></div>`
+    : '';
+
+  col.innerHTML = `
+    <div class="result-panel">
+      <div class="decision-banner ${cls}">
+        <div class="decision-icon">${decisionIcon(cls)}</div>
+        <div class="decision-text">
+          <div class="decision-label">${escapeHtml(r.decision || 'Decision Pending')}</div>
+          <div class="decision-value">${escapeHtml(r.decision_rationale || '').slice(0, 80)}${(r.decision_rationale||'').length > 80 ? '…' : ''}</div>
+        </div>
+      </div>
+
+      <div class="kv-list">
+        ${authNum}${denialHtml}
+        <div class="kv-row"><span class="kv-key">Risk Level</span><span class="kv-value">${escapeHtml(r.procedure_risk_level || 'STANDARD')}</span></div>
+        <div class="kv-row"><span class="kv-key">Review Time</span><span class="kv-value">${r.estimated_review_time_days || 1} day(s)</span></div>
+      </div>
+
+      ${criteriaHtml ? `<div class="section-divider">Criteria Evaluated</div><div class="criteria-list">${criteriaHtml}</div>` : ''}
+      ${missingHtml ? `<div class="section-divider">Missing Documentation</div><div class="flags-list">${missingHtml}</div>` : ''}
+      ${guidelinesHtml ? `<div class="section-divider">Clinical Guidelines Cited</div><div class="flags-list">${guidelinesHtml}</div>` : ''}
+
+      ${r.appeal_rights ? `<div class="section-divider">Appeal Rights</div><div class="flags-list"><div class="flag-item info"><div class="flag-dot"></div>${escapeHtml(r.appeal_rights)}</div></div>` : ''}
+
+      <div id="flags-container"></div>
+      <div id="confidence-container"></div>
+      <div class="section-divider">Audit</div>
+      <div id="audit-container"></div>
+    </div>`;
+
+  renderFlags(r.compliance_flags, document.getElementById('flags-container'));
+  renderConfidence(r.confidence_score, document.getElementById('confidence-container'));
+  renderAuditInfo(r, document.getElementById('audit-container'));
+}
+</script>
+</body>
+</html>

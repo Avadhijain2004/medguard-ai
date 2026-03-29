@@ -1,0 +1,12 @@
+backend/.env
+backend/audit_log.jsonl
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+node_modules/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/

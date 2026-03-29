@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device Implant Form Agent — MedGuard AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="7" fill="#1B4F72"/>
+        <path d="M14 6v16M6 14h16" stroke="#A8C8E8" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="4" stroke="#5BA4CF" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="logo-text"><span class="logo-name">MedGuard</span><span class="logo-sub">AI Platform</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Agents</div>
+    <a href="../index.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg>Dashboard</a>
+    <a href="medical-coding.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><path d="M4 3h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Medical Coding</a>
+    <a href="prior-auth.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.7l-4.9 2.5.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Prior Authorization</a>
+    <a href="claims.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Claims Adjudication</a>
+    <a href="device-form.html" class="nav-item active"><svg class="nav-icon" viewBox="0 0 20 20"><rect x="6" y="2" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 16h2M10 14v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Device Implant Form</a>
+    <div class="nav-section-label" style="margin-top:16px">Compliance</div>
+    <a href="audit.html" class="nav-item"><svg class="nav-icon" viewBox="0 0 20 20"><path d="M3 6h14M3 10h10M3 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Audit Trail</a>
+  </nav>
+  <div class="sidebar-footer"><div class="compliance-badge"><span class="badge-dot"></span>HIPAA Compliant</div></div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="page-title">Device Implant Form Agent</h1>
+    </div>
+    <div class="topbar-right">
+      <span style="font-size:12px;color:var(--amber);font-weight:600;margin-right:10px">★ Your Hackathon Idea</span>
+      <button class="btn btn-secondary btn-sm" onclick="loadSample()">Load Sample Form</button>
+    </div>
+  </header>
+
+  <div class="page-content">
+    <div class="agent-page">
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Implant Documentation</div>
+            <div class="card-subtitle">Enter device details for UDI validation and FDA compliance check</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)">Device Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Device Name</label>
+              <input class="form-input" id="device-name" placeholder="e.g. Zimmer Persona Knee System">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Manufacturer</label>
+              <input class="form-input" id="manufacturer" placeholder="e.g. Zimmer Biomet">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">UDI — Device Identifier (DI)</label>
+              <input class="form-input" id="udi-di" placeholder="e.g. 00813263005043">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Lot Number</label>
+              <input class="form-input" id="lot-number" placeholder="e.g. A123456">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Serial Number</label>
+              <input class="form-input" id="serial-number" placeholder="SN-XXXXXXX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expiration Date</label>
+              <input class="form-input" id="expiration-date" type="date">
+            </div>
+          </div>
+
+          <div style="font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);margin:16px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)">Procedure Details</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Implant Date</label>
+              <input class="form-input" id="implant-date" type="date">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Implant Site / Laterality</label>
+              <input class="form-input" id="implant-site" placeholder="e.g. Right Knee">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Surgeon</label>
+              <input class="form-input" id="surgeon" placeholder="Dr. Name, MD">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Facility</label>
+              <input class="form-input" id="facility" placeholder="Hospital / Facility name">
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="run-btn" onclick="runAgent()" style="width:100%;margin-top:4px">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M8 7l6 3-6 3V7z" fill="currentColor"/></svg>
+            Process Implant Form
+          </button>
+        </div>
+      </div>
+
+      <div id="results-col">
+        <div class="result-panel">
+          <div class="result-empty">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M11 18h2M12 16v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p>Submit implant details to validate<br>UDI, FDA class, and registry readiness</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="../js/api.js"></script>
+<script>
+async function loadSample() {
+  const data = await apiGet('/device-form/sample');
+  document.getElementById('device-name').value = data.device_name || '';
+  document.getElementById('manufacturer').value = data.manufacturer || '';
+  document.getElementById('udi-di').value = data.udi_di || '';
+  document.getElementById('lot-number').value = data.lot_number || '';
+  document.getElementById('serial-number').value = data.serial_number || '';
+  document.getElementById('expiration-date').value = data.expiration_date || '';
+  document.getElementById('implant-date').value = data.implant_date || '';
+  document.getElementById('implant-site').value = data.implant_site || '';
+  document.getElementById('surgeon').value = data.surgeon || '';
+  document.getElementById('facility').value = data.facility || '';
+}
+
+async function runAgent() {
+  const deviceName = document.getElementById('device-name').value.trim();
+  if (!deviceName) { alert('Please enter a device name.'); return; }
+
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true;
+  showLoading('results-col', 'Validating UDI, FDA class, and registry compliance...');
+
+  try {
+    const result = await apiPost('/device-form/process', {
+      device_name: deviceName,
+      manufacturer: document.getElementById('manufacturer').value,
+      udi_di: document.getElementById('udi-di').value,
+      lot_number: document.getElementById('lot-number').value,
+      serial_number: document.getElementById('serial-number').value,
+      expiration_date: document.getElementById('expiration-date').value,
+      implant_date: document.getElementById('implant-date').value,
+      implant_site: document.getElementById('implant-site').value,
+      surgeon: document.getElementById('surgeon').value,
+      facility: document.getElementById('facility').value
+    });
+    renderResults(result);
+  } catch(e) {
+    showError('results-col', 'Agent error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderResults(r) {
+  const col = document.getElementById('results-col');
+  const di = r.device_info || {};
+  const cs = r.compliance_status || {};
+  const pi = r.patient_info || {};
+
+  const registryReady = r.registry_submission_ready;
+  const recallFlag = cs.recall_flag;
+
+  const bannerClass = recallFlag ? 'denied' : registryReady ? 'approved' : 'pending';
+  const bannerLabel = recallFlag ? 'RECALL ALERT — Do Not Use' : registryReady ? 'Registry Submission Ready' : 'Action Required';
+  const bannerDetail = recallFlag ? 'This device lot is subject to a recall' : `FDA Class ${di.fda_class || '—'} — ${di.clearance_type || '—'}`;
+
+  const pcsHtml = (r.icd10_pcs_codes || []).map(c => `
+    <div class="code-item">
+      <span class="code-badge pcs">${escapeHtml(c.code)}</span>
+      <div class="code-info"><div class="code-desc">${escapeHtml(c.description)}</div></div>
+    </div>`
+  ).join('');
+
+  const statusIcon = (ok) => ok
+    ? `<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+    : `<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/></svg>`;
+
+  col.innerHTML = `
+    <div class="result-panel">
+      <div class="decision-banner ${bannerClass}">
+        <div class="decision-icon">${decisionIcon(bannerClass)}</div>
+        <div class="decision-text">
+          <div class="decision-label">${bannerLabel}</div>
+          <div class="decision-value">${bannerDetail}</div>
+        </div>
+      </div>
+
+      <div class="section-divider">Device Information</div>
+      <div class="kv-list">
+        <div class="kv-row"><span class="kv-key">Device</span><span class="kv-value">${escapeHtml(di.device_name || '—')}</span></div>
+        <div class="kv-row"><span class="kv-key">Manufacturer</span><span class="kv-value">${escapeHtml(di.manufacturer || '—')}</span></div>
+        <div class="kv-row"><span class="kv-key">UDI-DI</span><span class="kv-value">${escapeHtml(di.udi_di || '—')}</span></div>
+        <div class="kv-row"><span class="kv-key">Lot / Serial</span><span class="kv-value">${escapeHtml(di.lot_number || '—')} / ${escapeHtml(di.serial_number || '—')}</span></div>
+        <div class="kv-row"><span class="kv-key">FDA Class</span><span class="kv-value">${escapeHtml(di.fda_class || '—')}</span></div>
+        <div class="kv-row"><span class="kv-key">Clearance</span><span class="kv-value">${escapeHtml(di.clearance_type || '—')}</span></div>
+        <div class="kv-row"><span class="kv-key">Expires</span><span class="kv-value">${escapeHtml(di.expiration_date || '—')}</span></div>
+      </div>
+
+      <div class="section-divider">Compliance Checks</div>
+      <div class="kv-list">
+        <div class="kv-row"><span class="kv-key">UDI Valid</span><span class="kv-value">${statusIcon(cs.udi_valid)} ${cs.udi_valid ? 'Yes' : 'No'}</span></div>
+        <div class="kv-row"><span class="kv-key">FDA Cleared</span><span class="kv-value">${statusIcon(cs.fda_cleared)} ${cs.fda_cleared ? 'Yes' : 'No'}</span></div>
+        <div class="kv-row"><span class="kv-key">Recall Flag</span><span class="kv-value">${statusIcon(!cs.recall_flag)} ${cs.recall_flag ? 'YES — RECALL' : 'None'}</span></div>
+        <div class="kv-row"><span class="kv-key">Tracking Complete</span><span class="kv-value">${statusIcon(cs.tracking_complete)} ${cs.tracking_complete ? 'Yes' : 'No'}</span></div>
+        <div class="kv-row"><span class="kv-key">Tracking ID</span><span class="kv-value">${escapeHtml(r.tracking_id || '—')}</span></div>
+      </div>
+
+      ${pcsHtml ? `<div class="section-divider">ICD-10-PCS Codes</div><div class="code-list">${pcsHtml}</div>` : ''}
+
+      <div id="flags-container"></div>
+
+      ${(r.missing_fields||[]).length ? `<div class="section-divider">Missing Fields</div><div class="flags-list">${(r.missing_fields||[]).map(f=>`<div class="flag-item warning"><div class="flag-dot"></div>${escapeHtml(f)}</div>`).join('')}</div>` : ''}
+
+      <div id="confidence-container"></div>
+      <div class="section-divider">Audit</div>
+      <div id="audit-container"></div>
+    </div>`;
+
+  renderFlags(r.compliance_flags, document.getElementById('flags-container'));
+  renderConfidence(r.confidence_score, document.getElementById('confidence-container'));
+  renderAuditInfo(r, document.getElementById('audit-container'));
+}
+</script>
+</body>
+</html>

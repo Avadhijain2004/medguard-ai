@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Coding Agent — MedGuard AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="7" fill="#1B4F72"/>
+        <path d="M14 6v16M6 14h16" stroke="#A8C8E8" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="4" stroke="#5BA4CF" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">MedGuard</span>
+      <span class="logo-sub">AI Platform</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Agents</div>
+    <a href="../index.html" class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg>
+      Dashboard
+    </a>
+    <a href="medical-coding.html" class="nav-item active">
+      <svg class="nav-icon" viewBox="0 0 20 20"><path d="M4 3h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Medical Coding
+    </a>
+    <a href="prior-auth.html" class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 20 20"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.7l-4.9 2.5.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      Prior Authorization
+    </a>
+    <a href="claims.html" class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Claims Adjudication
+    </a>
+    <a href="device-form.html" class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 20 20"><rect x="6" y="2" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 16h2M10 14v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Device Implant Form
+    </a>
+    <div class="nav-section-label" style="margin-top:16px">Compliance</div>
+    <a href="audit.html" class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 20 20"><path d="M3 6h14M3 10h10M3 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Audit Trail
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="compliance-badge"><span class="badge-dot"></span>HIPAA Compliant</div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="page-title">Medical Coding Agent</h1>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-secondary btn-sm" onclick="loadSample()">Load Sample Note</button>
+    </div>
+  </header>
+
+  <div class="page-content">
+    <div class="agent-page">
+
+      <!-- INPUT -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Clinical Documentation</div>
+            <div class="card-subtitle">Paste a clinical note or operative report</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Clinical Note</label>
+            <textarea class="form-textarea" id="clinical-note" placeholder="Paste clinical documentation here..." style="min-height:200px"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Patient Age</label>
+              <input class="form-input" id="pt-age" type="number" placeholder="e.g. 65">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Insurance</label>
+              <select class="form-select" id="pt-insurance">
+                <option value="">Select payer</option>
+                <option value="Medicare">Medicare</option>
+                <option value="Medicaid">Medicaid</option>
+                <option value="BlueCross">BlueCross PPO</option>
+                <option value="Aetna">Aetna</option>
+                <option value="UnitedHealth">UnitedHealth</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="run-btn" onclick="runAgent()" style="width:100%">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M8 7l6 3-6 3V7z" fill="currentColor"/></svg>
+            Run Coding Agent
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div id="results-col">
+        <div class="result-panel">
+          <div class="result-empty">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.5"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p>Submit a clinical note to receive<br>ICD-10 and CPT code assignments</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="../js/api.js"></script>
+<script>
+async function loadSample() {
+  const data = await apiGet('/medical-coding/sample');
+  document.getElementById('clinical-note').value = data.clinical_note;
+  document.getElementById('pt-age').value = data.patient_context?.age || '';
+  const sel = document.getElementById('pt-insurance');
+  if (data.patient_context?.insurance) sel.value = data.patient_context.insurance;
+}
+
+async function runAgent() {
+  const note = document.getElementById('clinical-note').value.trim();
+  if (!note) { alert('Please enter a clinical note.'); return; }
+
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true;
+  showLoading('results-col', 'AI agent analyzing clinical documentation...');
+
+  try {
+    const result = await apiPost('/medical-coding/analyze', {
+      clinical_note: note,
+      patient_context: {
+        age: document.getElementById('pt-age').value,
+        insurance: document.getElementById('pt-insurance').value
+      }
+    });
+    renderResults(result);
+  } catch(e) {
+    showError('results-col', 'Agent error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderResults(r) {
+  const col = document.getElementById('results-col');
+  const needsReview = r.requires_human_review;
+
+  let codesHtml = '';
+  if (r.principal_diagnosis) {
+    codesHtml += `
+      <div class="code-item">
+        <span class="code-badge icd">${escapeHtml(r.principal_diagnosis.code)}</span>
+        <div class="code-info">
+          <div class="code-desc">${escapeHtml(r.principal_diagnosis.description)} <small style="color:var(--blue);font-size:11px">(Principal)</small></div>
+          <div class="code-rationale">${escapeHtml(r.principal_diagnosis.rationale)}</div>
+        </div>
+      </div>`;
+  }
+  (r.secondary_diagnoses || []).forEach(d => {
+    codesHtml += `
+      <div class="code-item">
+        <span class="code-badge icd">${escapeHtml(d.code)}</span>
+        <div class="code-info">
+          <div class="code-desc">${escapeHtml(d.description)}</div>
+          <div class="code-rationale">${escapeHtml(d.rationale)}</div>
+        </div>
+      </div>`;
+  });
+  (r.procedure_codes || []).forEach(p => {
+    const flag = p.prior_auth_required ? `<span style="color:var(--amber);font-size:11px;margin-left:6px">⚠ Prior Auth Required</span>` : '';
+    codesHtml += `
+      <div class="code-item">
+        <span class="code-badge cpt">${escapeHtml(p.code)}${p.modifier ? '-' + p.modifier : ''}</span>
+        <div class="code-info">
+          <div class="code-desc">${escapeHtml(p.description)}${flag}</div>
+          <div class="code-rationale">${escapeHtml(p.rationale)}</div>
+        </div>
+      </div>`;
+  });
+
+  let guidelinesHtml = (r.coding_guidelines_applied || []).map(g =>
+    `<div class="flag-item info"><div class="flag-dot"></div>${escapeHtml(g)}</div>`
+  ).join('');
+
+  let gapsHtml = (r.documentation_gaps || []).map(g =>
+    `<div class="flag-item warning"><div class="flag-dot"></div>${escapeHtml(g)}</div>`
+  ).join('');
+
+  col.innerHTML = `
+    <div class="result-panel">
+      <div class="decision-banner ${needsReview ? 'review' : 'approved'}">
+        <div class="decision-icon">${decisionIcon(needsReview ? 'review' : 'approved')}</div>
+        <div class="decision-text">
+          <div class="decision-label">${needsReview ? 'Human Review Required' : 'Coding Complete'}</div>
+          <div class="decision-value">${(r.procedure_codes||[]).length + 1 + (r.secondary_diagnoses||[]).length} codes assigned</div>
+        </div>
+      </div>
+
+      <div class="section-divider">Diagnosis Codes (ICD-10)</div>
+      <div class="code-list">${codesHtml || '<div style="padding:0 0 8px;color:var(--text-muted);font-size:13px">No codes assigned</div>'}</div>
+
+      <div id="flags-container"></div>
+
+      ${guidelinesHtml ? `<div class="section-divider">Guidelines Applied</div><div class="flags-list">${guidelinesHtml}</div>` : ''}
+      ${gapsHtml ? `<div class="section-divider">Documentation Gaps</div><div class="flags-list">${gapsHtml}</div>` : ''}
+
+      <div id="confidence-container"></div>
+      <div class="section-divider">Audit</div>
+      <div id="audit-container"></div>
+    </div>`;
+
+  renderFlags(r.compliance_flags, document.getElementById('flags-container'));
+  renderConfidence(r.confidence_score, document.getElementById('confidence-container'));
+  renderAuditInfo(r, document.getElementById('audit-container'));
+}
+</script>
+</body>
+</html>
